@@ -1,0 +1,29 @@
+\section{介绍}
+在自然语言处理（NLP）中，词的分布式表示是指为词汇表（vocabulary）里的每一个词都指派一个$n$维的实向量。
+近年来，随着模型的不断提出和改进，这些词向量捕获了细粒度的语法和语义规律，
+可以显著的改进和简化许多NLP应用，例如：
+信息检索（information retrieve）\cite{DBLP:books/daglib/0021593}，
+文档分类（document classification）\cite{Sebastiani:2002:MLA:505282.505283}，
+问答系统（question answering）\cite{DBLP:conf/sigir/TellexKLFM03}，
+命名实体识别（named entity recognition）\cite{DBLP:journals/jmlr/CollobertWBKKK11}，
+解析（parsing）\cite{DBLP:conf/icml/SocherLNM11}，
+词性标记（part-of-speech tagging） \cite{DBLP:journals/jmlr/CollobertWBKKK11}，
+依赖解析（dependency parsing）\cite{DBLP:conf/emnlp/ChenM14} \cite{DBLP:conf/emnlp/KongSSBDS14}，
+以及机器翻译（machine translation）
+\cite{DBLP:conf/acl/LiuYLZ14}
+\cite{DBLP:conf/emnlp/KalchbrennerB13}
+\cite{DBLP:conf/acl/DevlinZHLSM14}
+\cite{DBLP:conf/nips/SutskeverVL14}。
+具体的，它们可作为应用的特征\cite{DBLP:conf/acl/TurianRB10} 或者用于初始化神经网络
+\cite{NIPS2012_4610}
+\cite{DBLP:journals/jmlr/ErhanBCMVB10}
+\cite{DBLP:conf/emnlp/GuoCWL14}。
+使用各种模型的词向量在不同的文集上训练，一些还被保存起来，用于将来的研究和比较
+\cite{DBLP:journals/corr/abs-1301-3781}。
+
+为了理解不同的词向量模型是如何捕获语法和语义规律的，本文对不同的模型进行了分类，分析和比较。
+本文的内容如下：
+\cref{sec:his-of-dist-rep} 介绍了词的分布式表示的历史；
+\cref{sec:mea-syn-and-sem-reg} 介绍了衡量词向量的语法和语义规律的向量偏移方法（vector offset method）；
+\cref{sec:diff-models} 对不同的模型进行了分类，分析和比较，讨论了它们的优点和局限性；
+\cref{sec:diss-and-concl} 总结了本文并给出了词向量模型几个可能的发展方向。

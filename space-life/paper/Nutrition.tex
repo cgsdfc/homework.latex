@@ -1,0 +1,317 @@
+\documentclass[a4paper]{standalone}
+\usepackage[linespread=1.5]{ctex}
+\usepackage{cleveref}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage[super]{nth}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[version=3]{mhchem}
+\usepackage[super,sort&compress,square]{natbib}
+\geometry{
+  top=25mm, bottom=25mm, left=30mm, right=20mm
+}
+\setmainfont{Times New Roman}
+\usepackage[hidelinks]{hyperref}
+\begin{document}
+\newcommand{\MaleConsume}[1][x]{C_{male}(#1)}
+\newcommand{\FemaleConsume}[1][x]{C_{female}(#1)}
+\newcommand{\TotalConsume}[1][x]{C_{total}(#1)}
+\def\Average{C_{average}}
+\def\GenderRatio{7/3}
+\def\TotalDays{100}
+\def\TotalCrews{10}
+\def\MaleNumer{7}
+\def\FemaleNumber{3}
+\def\MaleConsumeEq{%
+  \frac{\alpha}{1+\alpha} \times \Average
+}
+\def\FemaleConsumeEq{%
+  \frac{1}{1+\alpha} \times \Average
+}
+
+\paragraph{计算方法：}
+\label{apx:nutrition:begin}
+
+计算的对象是全员总任务时间对物质和能量的总消耗量的估计值。
+其中物质和能量包括氧气、水、能量和营养物质（维生素和矿物质等）。
+
+\paragraph{假设：}
+
+所有具有一定范围的值都做\emph{保守估计}，取其最大值；作为消耗量的计算，
+可再生物质的循环利用将\emph{不予考虑}。下面对计算涉及的参数和变量进行说明和确定。
+
+\paragraph{计算公式和参数:}
+
+设男乘员有$M$人，女乘员有$W$人，则总人数为$K=M+W$人。
+任务持续天数为$T$，某物质或能量$x$的日均消耗男乘员和女乘员分别为$\MaleConsume$，$\FemaleConsume$，
+单位由$x$确定，则$x$的总消耗量的\emph{估计值}$\TotalConsume$为：
+\begin{equation}
+  \TotalConsume = (M \times \MaleConsume + W \times \FemaleConsume) \times T
+\end{equation}
+
+\paragraph{参数的确定：}
+
+\paragraph{任务时长$T$的确定：}
+
+参考“月宫一号”于2014年5月成功完成的，我国首次长期高闭合度集成实验的持续时间为105天\cite{月宫一号}，
+拟将$T$设置为\TotalDays 天。
+
+\paragraph{乘员人数$K,M,W$的确定：}
+
+$K$的确定：设计书中提及火星宫”分2期建设， 整体建成后可容纳100人“火星宫”一期可容纳\TotalCrews 人，
+主要开展火星生命科学研究\cite{任务设计书}。
+因为本说明书是一期的设计说明书，所以$K$确定为\TotalCrews 人。根据“月宫一号”的男女比例7/3，
+将$M$和$W$分别设置为\MaleNumer 和\FemaleNumber 。
+
+\paragraph{男女乘员物质和能量的每日需求量$\MaleConsume, \FemaleConsume$确定：}
+
+可以根据人类对$x$的平均需求量$\Average$再乘以表示男女差异的系数 $\alpha = \MaleConsume / \FemaleConsume$，得出：
+\begin{align}
+  \MaleConsume &= \MaleConsumeEq \\
+  \FemaleConsume &= \FemaleConsumeEq
+\end{align}
+不同的物质和能量的数据以表格列出。
+
+\def\Oxygen{\ce{O2}}
+\def\OxygenUnit{kg/(person•day)}
+\def\OxygenConsume{\TotalConsume[\Oxygen]}
+\def\MaleOxygen{0.654}
+\def\FemaleOxygen{0.306}
+\def\TotalOxygen{54.960}
+
+%---------------氧气需求---------------------------------%
+
+\paragraph{耗氧量$\OxygenConsume$的计算：}
+
+根据设计原则\cite{center2002advanced}，氧气的供给量要足够支持一个乘员参与
+中等到高等强度的活动，根据保守估计原则，选取\cref{tab:oxygen}的高等活动强度的数据，得出
+$\Average = 0.96 \OxygenUnit$。男女比例的数据从表格的\emph{\nth{95} Percentile Nominal Male}
+和\emph{\nth{5} Percentile Nominal Female}中得出为$\alpha = 1.11 / 0.52 \approx 2.134$。
+根据以上数据，可以得出：
+\begin{align*}
+  \MaleConsume[\Oxygen] &= \MaleConsumeEq \\
+                        &= \frac{2.134}{1+2.134} \times 0.78 \approx \MaleOxygen \OxygenUnit \\
+  \FemaleConsume[\Oxygen] &= \FemaleConsumeEq \\
+                          &= \frac{1}{1+2.134} \approx 0.306 \OxygenUnit \\
+  \OxygenConsume &= (M \times \MaleConsume[\Oxygen] + W \times \FemaleConsume[\Oxygen]) \times T \\
+                 &= (\MaleNumer \times \MaleOxygen + \FemaleNumber \times \FemaleOxygen) \times \TotalDays
+  \approx \TotalOxygen kg
+\end{align*}
+\begin{table}[H]
+  \caption{Table of Oxygen Requirements}
+  \centering
+  \begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline
+    Category & Metabolic Load [kJ/(person•day)] & Oxygen Requirements[\OxygenUnit]
+    \tabularnewline \hline
+    Low Activity Metabolic Load * &  10,965 & 0.78 \tabularnewline\hline
+    Nominal Activity Metabolic Load ** & 11,82 & 0 0.84 \tabularnewline\hline
+    High Activity Metabolic Load * & 13,498 & 0.96 \tabularnewline\hline
+    \nth{5} Percentile Nominal Female & 7,590 & 0.52 \tabularnewline\hline
+    \nth{95} Percentile Nominal Male & 15,570 & 1.11 \tabularnewline\hline
+  \end{tabularx}
+  \vskip 5mm
+  \raggedright\textbf{Note}
+  \begin{itemize}
+    \item[*] From Space Station Freedom Program via C. H. Lin (NASA/JSC), personal communication.
+    \item[**] From the Baseline Values and Assumptions Document, JSC-47804.
+    \item[] The assumed conversion factor from liters of \Oxygen to calories is 4.8 cal/L here.
+      February 2003 3--9 A pressure of
+      101.325 kPa and a temperature of 0 °C are the standard conditions.
+  \end{itemize}
+  \label{tab:oxygen}
+\end{table}
+
+%----------------水需求-----------------------------------%
+
+\def\Water{\ce{H2O}}
+\def\WaterConsume{\TotalConsume[\Water]}
+\def\WaterUnitKg{kg/person•day}
+\def\WaterUnitL{L/person•day}
+\def\DrinkWater{1994.0}
+\def\HygieneWater{5.16}
+\def\WaterAve{1999.160}
+\def\MaleWater{1043.082}
+\def\FemaleWater{956,078}
+\def\TotalWater{1016980.800}
+\def\WaterRatio{1.091}
+
+\paragraph{水消耗量$\WaterConsume$的计算：}
+
+乘员用水主要分为两个方面：饮用水和清洁用水。饮用水的供给至少要达到2.0 \WaterUnitL\ 。
+清洁用水则根据当前条件尽可能的供给，如\cref{tab:HygieneWater}。基于保守估计，清洁用水取值为\emph{Operational}
+的最大值\HygieneWater \WaterUnitKg ，饮用水取值为2.0 \WaterUnitL ，即\footnote{水的密度为$997 kg/m^3$}\DrinkWater \WaterUnitKg 。
+男女差异系数取自人体含水量的男女比例\footnote{成年男子总体水约为体重的60\% ,女子为50\%--55\%}，$\alpha \approx \WaterRatio$。水消耗量的计算过程如下：
+\begin{align*}
+  \Average &= C_{drink} + C_{hygiene} \\
+           &= \HygieneWater + \DrinkWater = \WaterAve \WaterUnitKg \\
+  \MaleConsume[\Water] &= \MaleConsumeEq  \\
+                       &= \frac{\WaterRatio}{1+\WaterRatio} \times \WaterAve \approx \MaleWater \WaterUnitKg \\
+  \FemaleConsume[\Water] &= \FemaleConsumeEq \\
+                         &= \frac{1}{1+\WaterRatio} \times \WaterAve \approx \FemaleWater \WaterUnitKg \\
+  \WaterConsume &= (M \times \MaleConsume[\Water] + W \times \FemaleConsume[\Water]) \times T \\
+                &= (\MaleNumer \times \MaleWater + \FemaleNumber \times \FemaleWater) \times \TotalDays \\
+                &\approx \TotalWater kg
+\end{align*}
+
+\begin{table}[H]
+  \caption{ Hygiene water requirements }
+  \centering
+  \label{tab:HygieneWater}
+  \begin{tabularx}{\textwidth}{|X|X|}
+    \hline
+    Mode & Hygiene Water [\WaterUnitKg] \tabularnewline\hline
+    Operational & 2.84 -- 5.16 \tabularnewline\hline
+    90-day Degraded & 2.84 \tabularnewline\hline
+    Emergency & 2.84 \tabularnewline\hline
+  \end{tabularx}
+\end{table}
+
+%--------------能量需求-------------------------------------%
+
+\def\EnergyConsume{\TotalConsume[E]}
+\def\MaleWeight{66}
+\def\MaleHeight{175}
+\def\MaleAge{25}
+\def\FemaleWeight{49}
+\def\FemaleHeight{163}
+\def\FemaleAge{23}
+\def\MaleBMR{1675.2}
+\def\FemaleBMR{716.3}
+\def\EnergyUnit{kcal/day}
+\def\MalePA{3517.920}
+\def\FemalePA{1303.666}
+\def\TotalBMRplusPA{42411.738}
+
+\paragraph{能量需求$\EnergyConsume$的计算：}
+人体能量消耗主要包括基础代谢(设基础代谢率为$BMR$ \EnergyUnit)，食物的代谢反应 $MRF$ ，体力活动 (设每日体力活动能量消耗率为$PA$ \EnergyUnit) ，
+和生长发育 \footnote{宇航员的生长发育忽略不计}组成：
+\begin{equation}
+  \EnergyConsume = (BMR_{total} + PA_{total}) \times T + MRF_{total}
+\end{equation}
+计算基础代谢率所用的公式由\cite{jeor1990} 给出，单位是\EnergyUnit ：
+\begin{align}
+  BMR_{male} &= 66 + 13.7 \times weight + 5.0 \times height - 6.8 \times age \\
+  BMR_{female} &= 65.5 + 9.5 \times weight + 1.8 \times height - 4.7 \times age
+\end{align}
+假设男乘员的平均年龄为\MaleAge ，平均体重和身高分别为 \SI{\MaleWeight}{\kilogram} 和\SI{\MaleHeight}{\metre} ；女乘员的平均年龄为
+\FemaleAge ， 平均身高体重分别为 \SI{\FemaleWeight}{\kilogram}和\SI{\FemaleHeight}{\metre} ，则计算可得：
+\begin{align*}
+  BMR_{male} &= 66 + 13.7 \times \MaleWeight + 5.0 \times \MaleHeight - 6.8 \times \MaleAge \\
+             &= \MaleBMR \EnergyUnit \\
+  BMR_{female} &= 65.5 + 9.5 \times \FemaleWeight + 1.8 \times \FemaleHeight - 4.7 \times \FemaleAge \\
+               &= \FemaleBMR \EnergyUnit \\
+\end{align*}
+体力活动的计算通过$BMR$乘以体力活动水平$PAL$来计算，$PAL$参考
+chinese-activity水平分级\cref{tab:chinese-activity}，基于保守估计的原则，取重活动强度的$PAL$：
+\begin{align*}
+  PA_{male} &= 2.10 \times BMR_{male} = \MalePA \EnergyUnit \\
+  PA_{female} &= 1.82 \times BMR_{female} = \FemalePA \EnergyUnit
+\end{align*}
+所以得出基础代谢率和体力活动能量消耗率的总和为：
+\begin{align*}
+  BMR_{total} + PA_{total} &= W \times (BMR_{female} + PA_{female}) + M \times (BMR_{male} + PA_{male}) \\
+                           &= \FemaleNumber \times (\FemaleBMR + \FemalePA) + \MaleNumer \times (\MaleBMR + \MalePA) \\
+                           &= \TotalBMRplusPA \EnergyUnit
+\end{align*}
+
+\begin{table}[H]
+  \centering
+  \caption{chinese-activity水平分级}
+  \label{tab:chinese-activity}
+  \begin{tabularx}{\textwidth}{|X|X|X|X|X|} \hline
+    活动强度 & 职业工作时间分配 & 工作内容举例　& $PAL_{male}$ & $PAL_{female}$ \tabularnewline \hline
+    轻 & 75\%时间坐或站立，25\%时间特殊职业活动 & 办公室工作，修理电器钟表售货员，酒店服务员，化学实验操作，讲课等 & 1.55 & 1.56 \tabularnewline \hline
+    中 & 25\%时间坐或站立，75\%时间特殊职业活动 & 学生日常活动，机动车电工安装，车工，金工等 & 1.78 & 1.64 \tabularnewline \hline
+    重 & 40\%时间坐或站立，60\%时间特殊职业活动 & 非机械化农业劳动，炼钢，舞蹈，体育运动，装卸，采矿等 & 2.10 & 1.82 \tabularnewline\hline
+  \end{tabularx}
+\end{table}
+
+食物热效应的计算涉及到不同营养成分在宇航员的食谱中所占的比例以及它们的食物热效应占成分的能值，不妨将其记为
+食谱设计$\eta$和食物能值比例$\omega$的函数，单位是 \EnergyUnit 。
+
+\begin{align}
+  MRF_{total} = \sigma(\eta, \omega) \times T
+\end{align}
+\begin{table}
+  \centering
+  \caption{不同能量物质的食物热效应}
+  \label{tab:FoodDynamic}
+  \begin{tabular}{|l|c|}\hline
+    食物成分 & 食物热效应 (占成分能值) \\ \hline
+    脂肪 & 4\%--5\% \\ \hline
+    碳水化合物 & 5\%--6\% \\ \hline
+    蛋白质 & 30\% \\ \hline
+    混合性食物 & 10\% \\ \hline
+  \end{tabular}
+\end{table}
+综上所述，目前能够计算出的能量消耗估计值为：
+\begin{align*}
+  \EnergyConsume &= (BMR_{total} + PA_{total}) \times T + MRF_{total} \\
+                 &= \TotalBMRplusPA \times \TotalDays + MRF_{total} \\
+                 &= 4241173.800 + MRF_{total} kcal
+\end{align*}
+
+%------------营养物质---------------------------------------%
+\def\NutrientsUnit{kcal\cdot d^{-1}}
+
+\paragraph{营养物质需求的计算：}
+人体对营养物质的需求包括这几大类：糖类(Carbohydrate)、蛋白质(Protein)、脂质(Fat)、
+维生素(Vitamin) 和微量元素(Minal) 。其中，糖类、蛋白质和脂质
+计量的方式是各类上述物质占人体能量消耗量的百分比乘以人体总能量消耗。
+参考\cref{tab:Nutritional} ，根据保守估计原则,
+Energy 取2900 $\NutrientsUnit$ ，各项比例均取最大值，得出：
+\begin{align*}
+  C_{carbohydrate} &= 2900 \times 60\% \times T = 174000.0 kcal \\
+  C_{protein} &= 2900 \times 15\% \times T = 435000.0 kcal \\
+  C_{fat} &= 2900 \times 30\% \times T = 87000.0 kcal \\
+\end{align*}
+
+\begin{table}[H]
+  \centering
+  %% 参考文献？？
+  \caption{Set values of Nutritional requirements of one crew-member}
+  \label{tab:Nutritional}
+  \begin{tabular}{ccc}
+    \toprule
+    \textbf{Nutrients} & \textbf{Unit} & \textbf{target~values} \\
+    \midrule
+    Energy & $\NutrientsUnit$ & 2800--2900 \\
+    Protein & \%Total energy consumed & 11--15 \\
+    Carbohydrate & \%Total energy consumed & 55--60 \\
+    Fat & \%Total energy consumed & 25--30 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+维生素和微量元素则用质量单位如毫克、微克等计量。参考\cref{tab:NutritionRequirements} ，
+给出几种常见维生素的总消耗量 \cite{cooper2011developing}：
+\begin{align*}
+  C_{Vitamin A} &= 900 \times T = \SI{90000}{\ug} \\
+  C_{Vitamin D} &= 25 \times T = \SI{2500}{\ug} \\
+  C_{Vitamin K}^{male} &= 90 \times T = \SI{9000}{\ug} \\
+  C_{Vitamin K}^{female} &= 120 \times T = \SI{12000}{\ug} \\
+  C_{Vitamin E} &= 15 \times T = \SI{1500}{\ug} \\
+\end{align*}
+以及常见微量元素的总消耗量：
+\begin{align*}
+  C_{\ce{Fe}} &= 10 \times T = \SI{1000}{\mg} \\
+  C_{\ce{Cu}} &= 9 \times T = \SI{900}{\mg} \\
+  C_{\ce{Zn}} &= 11 \times T = \SI{11}{\mg}
+\end{align*}
+%---------------------------------------
+\input{nutritionlongtable}
+%---------------------------------------
+
+\paragraph{总结}
+\label{apx:nutrition:end}
+本文结合了营养学，食品学和航空学等领域的文献，
+对宇航员的各种营养需求做了粗略的估计。本文对数值采取保守估计的原则，
+得出了一定数量的乘员在一定时长内消耗的氧气，水，能量和营养物质的总量。
+\end{document}

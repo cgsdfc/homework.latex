@@ -1,0 +1,18 @@
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage[center]{subfigure}
+\usepackage{amssymb}
+\usepackage{graphicx,amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\algorithmicrequire}{ \textbf{输入}}
+\renewcommand{\algorithmicensure}{ \textbf{输出}}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{color}
+\usepackage{cleveref}
+

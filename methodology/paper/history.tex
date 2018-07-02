@@ -1,0 +1,55 @@
+\section{词的分布式表示的历史}
+\label{sec:his-of-dist-rep}
+
+\subsection{分布式假设}
+
+分别式假设是在上个世纪70年代由美国语言学家Harris Zellig提出一系列
+对语言本质的假设\cite{harris54}，其主要内容是：
+具有相似分布规律的语言实体也具有相似的意思；或者，具有相似意思的语言实体通常出现在相似的位置。
+基于这个假设的方法通常利用语言的分布式信息，例如，单词出现在彼此的上下文中，
+或单词有着相似的上下文，来获取语言实体的含义\cite{Sahlgren2008}。
+
+用基于分布式假设获取的含义称为分布式含义。
+这种含义和客观世界的对象（例如汽车）或者主观世界的思想（例如相对论）并没有直接关系\cite{Sahlgren2008}。
+分布式含义完全建立在语言实体的区别的基础上，换句话说， 分布式含义的本质是语言实体的区别。% TODO 法国人的引用
+这个思想为基于向量偏移的词向量相似度评估方法奠定了基础。
+
+\subsection{词的分布式表示}
+词的分布式表示有着漫长的历史，早期的提出者包括
+\cite{hinton:learndistrep} % 亨顿
+\cite{DBLP:journals/ai/Pollack90} % 伯拉
+\cite{DBLP:journals/jasis/DeerwesterDLFH90} % 迪恩韦斯特
+等人。
+Bengio等人在\cite{DBLP:journals/jmlr/BengioDVJ03}\cite{Bengio2006}中
+提出了神经网络语言模型（NNLM），又称神经概率语言模型（NPLM）。
+该模型在训练一个语言的概率分布函数的同时，在投影层获得了词向量。
+该模型带有非线性的隐藏层，并且对整个词汇表进行了softmax，这些复杂度较高的操作限制了它的扩展性。
+后人分别在softmax和隐藏层上进行了改进：
+\cite{DBLP:conf/nips/MnihH08}和\cite{DBLP:conf/aistats/MorinB05}提出了分层softmax
+（hierarchical softmax），成功的提高了模型的效率；
+Mikolov等人在\cite{4960686}和\cite{DBLP:journals/corr/abs-1301-3781}均使用了没有隐藏层的简单模型，提升了模型的整体效率；
+Mikolov等人还使用循环神经网络取代NNLM的前馈神经网络训练词向量，
+以获得某种短期记忆
+\cite{DBLP:conf/interspeech/MikolovKBCK10}
+\cite{DBLP:conf/naacl/MikolovYZ13}。
+
+Mikolov等人在\cite{DBLP:journals/corr/abs-1301-3781}中提出了两种训练词向量的高效模型：
+连续词袋模型（Continuous Bag-of-Word，CBOW）和Skip-gram模型，二者又称为\texttt{word2vec}模型。
+它们的基本原理分别是给定一个上下文窗口内的词
+预测窗口中心的词（CBOW）和给定中心词预测上下文词（Skip-gram），
+并根据预测结果最大化模型的对数似然度（log likehood）。
+这些模型能在十亿数量级的文本上进行高效的训练，而且得到的词向量具有丰富的语法和语义
+规律。此后，人们提出了许多这两个模型的扩展：
+\cite{DBLP:conf/emnlp/LingTAFDBTL15}为CBOW引入了把关注度机制，克服了CBOW对词序不敏感
+% 注意力 关注度
+的问题，提高了在语法任务上的准确率；
+\cite{DBLP:journals/tacl/BojanowskiGJM17}为CBOW引入了词法信息；
+\cite{DBLP:conf/acl/SunGLXC15}则受到\cite{Sahlgren2008}的启发，
+把语段关系（syntagmatic）和范式关系（paradigmatic）同时引进了CBOW和Skip-gram，
+得到了两个新的模型，提高了在语法和语义任务上的性能。
+
+另一方面，Pennington等人提出了Glo Vec模型\cite{pennington2014glove}。与\texttt{word2vec}的模型不同的
+是，该模型直接在全局词--词共现矩阵上训练了一个加权最小二乘目标函数。该模型在多项任务中均超过了
+\texttt{word2vec}，而且更高效的利用了文集的统计信息。
+
+

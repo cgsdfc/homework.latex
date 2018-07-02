@@ -1,0 +1,32 @@
+\documentclass{llncs}
+\usepackage{ctex}
+
+\title{分布式词向量模型的分析和比较}
+\author{}
+\institute{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  基于连续空间的词向量已经在一系列自然语言处理任务中取得成功。
+  近年来，人们围绕着词向量的训练提出了各种各样的模型，取得了不同程度的成效。
+  本文对几种经典的词向量模型，如Continuous~Bag-of-Word，Skip-gram，Glo~Vec，及其扩展进行了分类，比较和分析。
+  由于不同模型存在不同的特性，本文提出了以下几种分类法：
+  按照模型的训练方法来分，可分为基于矩阵分解的模型和基于神经网络的模型；
+  按照训练目标来分，可分为预测型模型和计数型模型；
+  按照所利用的分布式信息的种类来分，可分为基于语段的模型和基于范式的模型。
+  本文详细分析了每一类模型的体系结构和计算复杂度，并讨论了它们的优点和局限性。
+  最后，本文提出了该领域几个可能的发展方向。
+  \keywords{分布式假设，词向量，自然语言处理}
+\end{abstract}
+
+\input{intro}
+\input{history}
+\input{measure}
+\input{models}
+\input{concl}
+
+\bibliographystyle{splncs03}
+\bibliography{all.bib}
+\end{document}
