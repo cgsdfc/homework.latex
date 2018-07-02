@@ -1,9 +1,0 @@
-[submodule "computation"]
-	path = computation
-	url = ./computation/.git
-[submodule "space-life"]
-	path = space-life
-	url = ./space-life/.git
-[submodule "methodology"]
-	path = methodology
-	url = ./methodology/.git
