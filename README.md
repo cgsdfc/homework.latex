@@ -6,6 +6,11 @@ of them that I take most pride of. You can wander around
 and get inspiration and give me feedback! Your enhancement
 is the best prize for my efforts to share all these!
 
+Languange
+=========
+Currently all the documents are Chinese-only. But all the README's
+are in English.
+
 How Does It Work
 ================
 Well, I covered many typical constructs of `LaTeX` in these projects
