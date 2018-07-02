@@ -3,15 +3,13 @@
 计算的科学定义是：建立模型、进行模拟、实验、验证等\cite{DBLP:books/daglib/0086373}。
 上世纪初，德国大数学家希尔伯特(Hilbert)提出：
 \begin{quotation}
-        是否存在着一个通用过程，这个过程能用来判定任意数学命题是否成立，即，
-        输入一个数学命题，在有限时间内，如果这个命题成立，得到一个证明；或如果这个命题不成立，则得到一个反例。
+  是否存在着一个通用过程，这个过程能用来判定任意数学命题是否成立，即，
+  输入一个数学命题，在有限时间内，如果这个命题成立，得到一个证明；或如果这个命题不成立，则得到一个反例。
 \end{quotation}
 图灵证明了对于平面几何来说，存在这样的过程。但是，对于一般的数学命题，不存在这样的过程。
 
 \section{计算与计算模型}
 
-%% lambda演算的提出者church是图灵的导师，lambda演算是“图灵完备”的，并且在图灵机
-%% 之前，所以列在图灵机前面。
 \subsection{Lambda演算}
 \def\LambdaCalculus{$\lambda$ 演算}
 \def\LambdaTerm{lambda项}
@@ -30,20 +28,20 @@
 
 \LambdaCalculus 包括了构建\LambdaTerm，对\LambdaTerm 执行规约的操作。
 \begin{table}[H]
-        \centering
-        \caption{构建\LambdaTerm 的规则}
-        \begin{tabular}{|l|l|l|}
-                \hline
-                语法 & 名称 & 描述 \\
-                \hline
-                $a$ & 变量 & 表示参数或数学/逻辑值的字元或字串 \\
-                \hline
-                $(\lambda x.M)$ & 抽象化 & 函数定义（$M$是一个\LambdaTerm）。
-                变量$x$在表达式中已被绑定。\\
-                \hline
-                $(M N)$ & 应用 & 将函数应用与参数。$M$ 和 $N$ 是\LambdaTerm。 \\
-                \hline
-        \end{tabular}
+  \centering
+  \caption{构建\LambdaTerm 的规则}
+  \begin{tabular}{|l|l|l|}
+    \hline
+    语法 & 名称 & 描述 \\
+    \hline
+    $a$ & 变量 & 表示参数或数学/逻辑值的字元或字串 \\
+    \hline
+    $(\lambda x.M)$ & 抽象化 & 函数定义（$M$是一个\LambdaTerm）。
+    变量$x$在表达式中已被绑定。\\
+    \hline
+    $(M N)$ & 应用 & 将函数应用与参数。$M$ 和 $N$ 是\LambdaTerm。 \\
+    \hline
+  \end{tabular}
 \end{table}
 
 \subsection{图灵机}
@@ -56,16 +54,16 @@
 \paragraph{图灵机的正式定义}
 一台\textbf{图灵机}是一个七元有序组$\TuringMathDef$ ，其中 $Q$, $\Sigma$, $\Gamma$ 都是\emph{有限集合}, 且满足：
 \begin{enumerate}
-        \item $Q$ 是非空有穷状态集合；
-        \item $\Sigma$ 是非空有穷输入字母表，其中不包含特殊的空白符 $\epsilon$；
-        \item $\Gamma$ 是非空有穷带字母表且$\Sigma \subset \Gamma$；
-        \item $\epsilon \in \Gamma - \Sigma $为\emph{空白符}，
-                也是唯一允许出现无限次的字符；
-        \item $ \delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,R,X\} $
-                其中 $L, R$ 表示读写头是向左移还是向右移, $X$ 表示不移动；
-        \item $q_0 \in Q$ 是起始状态；
-        \item $q_{accept} \in Q$ 是接受状态。$q_{reject} \in Q$ 是拒绝状态，
-                且$q_{reject} \neq q_{accept}$。
+  \item $Q$ 是非空有穷状态集合；
+  \item $\Sigma$ 是非空有穷输入字母表，其中不包含特殊的空白符 $\epsilon$；
+  \item $\Gamma$ 是非空有穷带字母表且$\Sigma \subset \Gamma$；
+  \item $\epsilon \in \Gamma - \Sigma $为\emph{空白符}，
+    也是唯一允许出现无限次的字符；
+  \item $ \delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,R,X\} $
+    其中 $L, R$ 表示读写头是向左移还是向右移, $X$ 表示不移动；
+  \item $q_0 \in Q$ 是起始状态；
+  \item $q_{accept} \in Q$ 是接受状态。$q_{reject} \in Q$ 是拒绝状态，
+    且$q_{reject} \neq q_{accept}$。
 \end{enumerate}
 
 图灵机$ M = \TuringMathDef $将以如下方式运作：
@@ -88,9 +86,9 @@ $M$的读写头指向第0号格子，$M$处于状态$q_0$。
 
 20世纪上半叶，对可计算性进行公式化表示的尝试有：
 \begin{itemize}
-        \item 美国数学家阿隆佐·邱奇创建了称为\LambdaCalculus 的方法来定义函数。
-        \item 英国数学家阿兰·图灵创建了可对输入进行运算的理论机器模型，现在被称为通用图灵机。
-        \item 邱奇等人一起定义了一类函数，这种函数的值可使用递归方法计算。
+  \item 美国数学家阿隆佐·邱奇创建了称为\LambdaCalculus 的方法来定义函数。
+  \item 英国数学家阿兰·图灵创建了可对输入进行运算的理论机器模型，现在被称为通用图灵机。
+  \item 邱奇等人一起定义了一类函数，这种函数的值可使用递归方法计算。
 \end{itemize}
 
 这三个理论在直觉上似乎是等价的——它们都定义了同一类函数。因此，计算机科学家和数学家们相信，可计算性的精确定义已经出现。
@@ -108,9 +106,9 @@ $M$的读写头指向第0号格子，$M$处于状态$q_0$。
 这两个机制描述的是同一集合的函数，正如邱奇和克林所展示的正整数函数那样。
 在听说了邱奇的建议后，图灵很快就证明了他的图灵机实际上描述的是同一集合的函数。
 
-\subsection{\VonArch}
 \def\VonNeumann{冯·诺依曼}
 \def\VonArch{\VonNeumann 体系结构}
+\subsection{\VonArch}
 
 1946年，\VonNeumann 用电子器件物理实现了图灵的计算模型，建成了世界的第一台计算机。
 \textbf{\VonArch}\cite{DBLP:journals/annals/Neumann93}。 (Von Neumann architecture)，
@@ -123,12 +121,12 @@ $M$的读写头指向第0号格子，$M$处于状态$q_0$。
 电脑的概念改变了这一切。藉由创造一组指令架构，并将所谓的运算转化为一串程序指令的执行
 细节，让机器更加灵活。储存程序计算机在体系结构上主要特点有：
 \begin{enumerate}
-        \item    以运算单元为中心
-        \item    采用存储程序原理
-        \item    存储器是按地址访问、线性编址的空间
-        \item    控制流由指令流产生
-        \item    指令由操作码和地址码组成
-        \item    数据以二进制编码
+  \item 以运算单元为中心
+  \item 采用存储程序原理
+  \item 存储器是按地址访问、线性编址的空间
+  \item 控制流由指令流产生
+  \item 指令由操作码和地址码组成
+  \item 数据以二进制编码
 \end{enumerate}
 
 \section{计算能力与计算效率}
@@ -148,14 +146,14 @@ $ P/NP $问题即是判断对任意的NP完全问题，是否有有效的算法�
 \paragraph{形式化定义}
 目前常用的定义是所谓的“关系定义式”。即对于一个语言$L$，$L$在$NP$中，
 那么存在多项式时间图灵机$M$，和多项式$p$使得\cite{DBLP:journals/jacm/Ladner75}：
-\begin{equation*}
-        x \in L \iff \exists y \in \{0,1\}_{p(|x|)}, M(x,y) = 1
-\end{equation*}
+\begin{align*}
+  x \in L \iff \exists y \in \{0,1\}_{p(|x|)}, M(x,y) = 1
+\end{align*}
 
 \begin{figure}[H]
-        \caption{NP，P，NPC问题韦恩图}
-        \centering
-        \includesvg[width=0.5\textwidth]{./figure/Complexity_classes.svg}
+  \caption{NP，P，NPC问题韦恩图}
+  \centering
+  \includesvg[width=0.5\textwidth]{./figure/Complexity_classes.svg}
 \end{figure}
 
 \paragraph{NP完全问题}
@@ -166,32 +164,32 @@ NP完全问题（NP-Complete, NPC），是计算复杂度理论中，决定性�
 
 一个决定性问题$C$若是NPC，则表示它对NP是完备的，则：
 \begin{enumerate}
-        \item 它是一个NP问题，且
-        \item 其他属于$NP$的问题都可以\emph{规约}成它。
+  \item 它是一个NP问题，且
+  \item 其他属于$NP$的问题都可以\emph{规约}成它。
 \end{enumerate}
 \textbf{可归约} 在此表示对每个问题$L$，总有一个多项式时间多对一变换，即一个决定性的
 算法可以将实例$ l \in L $转化为实例$ c \in C $，并让$c$回答Yes当且仅当此答案对$I$也是
 Yes \cite{DBLP:journals/jacm/Ladner75}。
 第一个NPC问题是由Leonid Levin和Cook独立证出SAT问题是NPC问題\cite{DBLP:conf/stoc/Cook71}。
 此后，许多问题被陆续证明为是NP完全问题。
-% 这里以后如果字数不够可以在加一些。
+
 一些经典的NPC问题：
 \begin{itemize}
-        \item 布尔可满足性问题
-        \item N-puzzle问题（华容道问题）
-        \item 哈密尔顿圆圈问题
-        \item 邮递员问题
-        \item 子图同构问题
-        \item 分团问题
-        \item 顶点覆盖问题
-        \item 独立顶点集问题
-        \item 图着色问题
+  \item 布尔可满足性问题
+  \item N-puzzle问题（华容道问题）
+  \item 哈密尔顿圆圈问题
+  \item 邮递员问题
+  \item 子图同构问题
+  \item 分团问题
+  \item 顶点覆盖问题
+  \item 独立顶点集问题
+  \item 图着色问题
 \end{itemize}
 
 \begin{figure}[H]
-        \caption{NPC问题的推导关系}
-        \centering
-        \includesvg[width=0.5\textwidth]{./figure/Relative_NPC_chart.svg}
+  \caption{NPC问题的推导关系}
+  \centering
+  \includesvg[width=0.5\textwidth]{./figure/Relative_NPC_chart.svg}
 \end{figure}
 
 \subsection{算法分析}

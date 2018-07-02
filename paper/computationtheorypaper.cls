@@ -32,6 +32,8 @@ Computation Theory of BUAA}
 \def\STXingkai{\CJKfamily{hwxingkai}}
 \def\STXinwei{\CJKfamily{hwxinwei}}
 
+\RequirePackage[x11names, rgb, html]{xcolor}
+
 %% Page Margin
 \RequirePackage{geometry}
 \geometry{
