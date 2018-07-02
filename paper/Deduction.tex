@@ -1,0 +1,343 @@
+\chapter{推理与计算}
+
+\section{逻辑与推理}
+\def\PLang{\mathcal{L}}
+\subsection{命题逻辑}
+在逻辑和数学中，命题逻辑（或称句子逻辑）是一个形式系统，
+由逻辑运算符结合原子命题来构成命题，以及允许某些公式构建成定理的一套形式证明规则。
+
+在一阶逻辑中，命题陈述某个对象的性质，或是某些对象的关系，是能够分辨真假的语句。
+一个语句如果不能再进一步分解成更简单的语句，并且又是一个命题，则称此命题为原子命题。
+
+命题演算是一个形式系统$\PLang = \PLang(A, \Omega, Z, I)$
+，它的公式如以下方式构造：
+\begin{itemize}
+        \item 原子命题是命题公式。
+        \item 若$A$是命题公式，则$\lnot A$也是命题公式。
+        \item 若$A$和$B$都是命题公式，则$A \land B$、$A \lor B$、
+        $A \rightarrow B$、$A \leftrightarrow B$是命题公式。
+\end{itemize}
+命题公式的缺点：
+\begin{itemize}
+        \item 无法把所描述的客观事物的结构和逻辑特征反映出来。
+        \item 不能把不同事物的共同特征反映出来。
+\end{itemize}
+
+\subsection{（一阶）谓词逻辑}
+在谓词逻辑中，将原子命题分解为谓词与个体两部分。
+个体是指可以独立存在的物体，可以是抽象的或具体的。
+谓词则是用于刻画个体的性质、状态或个体间的关系的。 
+谓词的一般形式是$P(x_1, x_2, \cdots, x_n)$，其中$P$是谓词，
+$x_1,x_2,\cdots,x_n$是个体。
+
+\paragraph{项的定义：}
+\begin{enumerate}
+        \item 单个的常量和变量都是项。
+        \item 如果$f$是函数, $t_1, \cdots, t_n$是项，那么   
+                $f(t_1, \cdots, t_n)$也是项。
+\end{enumerate}
+
+\paragraph{原子的定义：}
+若$P$是一个$n$元谓词符号，$t_1,\cdots,t_n$是项，那么
+$P(t_1,\cdots,t_n)$是原子。
+\paragraph{公式的定义：}
+\begin{itemize}
+        \item 原子是公式。
+        \item 若$P$， $Q$是公式，
+                则$P \rightarrow Q$， $P \leftrightarrow Q$，
+                $P \land Q$， $P \lor Q$， $\lnot P$是公式。
+        \item 若$P$是公式， $x$是中的变量，则
+                $\exists x P$，$\forall x P$是公式。
+\end{itemize}
+
+\paragraph{谓词公式的解释：}
+设$D$为谓词公式$P$的个体域，若对$P$中的个体常量、函数和谓词按照如下规定赋值：
+\begin{enumerate}
+        \item 为每个个体常量指派$D$中的一个元素；
+        \item 为每个$n$元函数指派一个从$D_n$到$D$的映射，其中
+                \begin{equation*}
+                        D_n = \{ (x_1, x_2, \cdots, x_n) \  | \  x_1, x_2, \cdots, x_n \in D \}
+                \end{equation*}
+        \item 为每个$n$元谓词指派一个从$D_n$到$ \{F, T\} $的映射；
+                则称这些指派为公式$P$在$D$上的一个解释。
+\end{enumerate}
+
+\paragraph{一阶逻辑的局限性：}
+\begin{itemize}
+        \item 难于表达\texttt{if-then-else}
+        \item 缺乏类型的概念
+        \item 难于刻画有限性或可数性
+        \item 图可及性不能表达
+\end{itemize}
+
+\section{霍恩逻辑程序}
+在数理逻辑中，霍恩子句（Horn Clause）是带有最多一个肯定文字的子句(文字的析取)。
+霍恩子句得名于逻辑学家 Alfred Horn，
+他在 1951 年首先在文章\cite{DBLP:journals/jsyml/Horn51} 中指出这种子句的重要性。
+
+在已知的知识表示方式中，产生式表示法是一类很重要的方法，知识表示成
+{\ttfamily IF ... THEN ... }的形式。霍恩子句即将规则和事实以统一的格式表示。
+霍恩子句可以表示成如下形式：
+\begin{equation*}
+        \text{规则体} \rightarrow \text{规则头}
+\end{equation*}
+
+其中规则体一般是$n$个原子的合取， $n=0, 1, \cdots$ 。规则头可以是单个原子，也可以是空。
+
+下面是一个霍恩子句的例子：
+\begin{equation*}
+        \lnot p \lor \lnot q \lor \cdots \lor \lnot t \lor u \text{，}
+\end{equation*}
+它可以被等价的改写为：
+\begin{equation*}
+        (p \land q \land \cdots \land t) \rightarrow u \text{。}
+\end{equation*}
+
+有且只有一个肯定文字的霍恩子句叫做明确子句， 没有任何肯定文字的霍恩子句叫做目标子句。
+霍恩子句的合取是合取范式， 也叫做霍恩公式。
+如果在一个子句中最多含有一个正文字，那么该子句称为霍恩子句。
+若一个子句集内的子句个数有限且都是霍恩子句，那么该子句集称为一个霍恩逻辑程序。
+
+霍恩子句对定理证明的实用性是一阶归结提供的，
+两个霍恩子句的归结是一个霍恩子句。
+在自动定理证明中，这能导致子句的在计算机上表示得更加高效。
+霍恩子句在逻辑编程中扮演基本角色并且在构造性逻辑中很重要。
+实际上，Prolog 就是完全在霍恩子句上构造的编程语言。
+霍恩子句在计算复杂性中也是关键的，
+在这里找到一组变量指派使霍恩子句的合取的为真的问题是一个P-完全问题，有时叫做 HORNSAT。
+这是布尔可满足性问题的 P 的变体，它是一个中心的\emph{NP-完全问题}。
+
+霍恩程序要素有：
+\begin{enumerate}
+        \item 规则： 规则体非空且规则头非空的子句。例如：
+                \begin{equation*}
+                        father(z,y), father(y,x) \rightarrow grandfather(z,x)
+                \end{equation*}
+        \item 事实： 规则体空且规则头非空的子句。例如： 
+                $ \rightarrow father(John, Peter) $
+        \item 目标： 无规则头的子句，
+                例如： $ grandfather(Smith, Peter) \rightarrow\text{，} $
+                即要查询$Smith$是否是$Peter$的祖父？
+\end{enumerate}
+
+一个霍恩逻辑程序是霍恩子句的集合，也就是规则和事实的集合。因此，一个霍恩逻辑程序相当于一个知识库。
+推理即是通过对一组子句按照一定的方式进行消解最终得到新的公式。
+自动推理的过程即给定目标子句，机器按照一定的顺序对逻辑程序中的子句进行消解，
+最后得到目标子句，或者得出目标不可满足的结论。
+
+\subsection{命题霍恩逻辑中的自动推理}
+在命题霍恩逻辑中，子句之间可以按照如下的方式消解。若有子句：
+\begin{align*}
+        S_1 &: A_1, \cdots , A_n \rightarrow \\
+        S_2 &: B_1, \cdots, B_m \rightarrow A_i
+\end{align*}
+则归结后的子句为：
+\begin{equation*}
+        S_3: A_1, \cdots , A_{i-1}, \quad B_1, \cdots , B_m, 
+        \quad A_{i+1}, \cdots , A_n \rightarrow
+\end{equation*}
+即利用规则$S_2$将原目标$S_1$转化为新目标$S_3$。
+基于上述消解方式，求证一个目标 $ S: A_1, \cdots , A_n \rightarrow $
+需要逐一以$S$的体中的每一个原子$A_i$作为新的目标进行求证。$A_1, \cdots , A_n$
+也称为$S$的子目标。
+在以一个原子$A_i$为目标进行求证时，考察子句集内所有头部是$A_i$的子句，
+以此子句的体作为新的目标。 
+
+\cref{algo:AtomDeduce}基于上述消解方式，求证一个目标$S: A_1, \cdots, A_n \rightarrow $需要
+逐一以$S$的每一个原子$A_i$作为新的目标进行求证。$A_1,\cdots,A_n$也称为
+$S$的子目标。
+在以一个原子$A_i$为目标进行求证时，
+考察子句集内所有头部是$A_i$的子句，以此子句的体作为新的目标。
+\begin{algorithm}
+        \caption{原子$A$的推理算法}
+        \label{algo:AtomDeduce}
+        \begin{algorithmic}[1]
+                \Require{$A$是原子公式}
+                \Ensure{$A$是否可以消解}
+                \Function{$TorF$}{$A$}
+                        \State $i \gets 0$
+                        \While{ $i < n$ } \Comment{n是此Horn逻辑程序内子句的个数}
+                        \If{第$i$条规则的头部$=A$} \Comment{用第$i$条规则考察$A$}
+                        \State\Return 1 \Comment{$A$是事实}
+                                        \If{第i条规则的体是空的}
+                                                \State\Return 1
+                                        \ElsIf{$TorF(A_1) = \cdots = TorF(A_m) = 1$}\\
+                                        \Comment{$A_1, \cdots, A_m$ 是第$i$条规则体内的所有原子}
+                                        \State\Return 1 \Comment{由第$i$条规则推出原子$A$的正确性}
+                                        \EndIf
+                                        \State $i \gets i + 1$ \\
+                                \Comment{第$i$条规则体内并非所有原子正确，从而需要考察别的规则}
+                                \EndIf
+                        \EndWhile
+                        \State\Return 0 \Comment{考察了所有的规则，都不能推出$A$}
+                \EndFunction
+        \end{algorithmic}
+\end{algorithm}
+
+\subsection{谓词霍恩逻辑中的自动推理}
+
+谓词Horn逻辑的消解要复杂一些。消解方式如下。若有子句：
+\begin{align*}
+        S_1 &: A_1 , \cdots, A_n \rightarrow \\
+        S_2 &: B_1 , \cdots, B_m \rightarrow B
+\end{align*}
+并且$A_i, B$ 具有合一置换$\theta$，则归结后的子句为：
+\begin{equation*}
+        S_3: (A_1, \cdots, A_{i-1}, \quad B_1, \cdots, B_m, \quad %
+        A_{i+1}, \cdots, A_n) \theta \rightarrow
+\end{equation*}
+与命题Horn逻辑相比，需要考虑项的匹配，即合一问题。
+基于以上消解方式，求证一个目标$S_1:A_1, \cdots, A_n \rightarrow$ 时，
+要求得出的结果应该是一个置换的集合。集合内的每一个元素$\theta_i$应该使得
+$A_1\theta_i,\cdots,A_n,\theta_i$ 成立。
+
+在以一个原子$A_i$为目标进行考察时，考察每一个头部是$A_i$的子句，
+以此子句的体作为新的目标。返回的不是$0$（假）或者$1$（真），而应是一个置换的集合$\Theta$。
+为此先要给出置换算法\textbf{Substitution}\cref{algo:Substitution}
+以及求表达式合一算法\textbf{Unify}\cref{algo:Unify}。
+
+\begin{algorithm}[H]
+        \caption{将置换$\theta$作用于表达式$e$的算法}
+        \label{algo:Substitution}
+        \begin{algorithmic}[1]
+                \Require{表达式$e$和置换$\theta$}
+                \Ensure{$\theta$作用后的$e$}
+                \Function{Substitution}{$e, \theta$}
+                        \If{$e$是常量符号}
+                                \State\Return $e$
+                        \EndIf
+                        \If{$e$是变量符号$x$}
+                                \If{$t/x \in \theta$}
+                                        \State\Return $t$
+                                \Else
+                                        \State\Return $e$
+                                \EndIf
+                        \EndIf
+                        \If{$e = f(t_1,\cdots,t_n)$}
+                                \State $t_1  \gets Substitution(t_1, \theta)$
+                                \State $\cdots$
+                                \State $t_n  \gets Substitution(t_n, \theta)$
+                                \State\Return $f(t_1,\cdots,t_n)$
+                        \EndIf
+                \EndFunction
+        \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+        \caption{对两个表达式$e_1$，$e_2$作合一}
+        \label{algo:Unify}
+        \begin{algorithmic}[1]
+                \Require{$e_1$，$e_2$是两个表达式}
+                \Ensure{合一置换或者``无法合一''的信息}
+                \Function{Unify}{$e_1, e_2$}
+                        \State $\theta\gets\emptyset$
+                        \If{$e_1$是变量符号$x$}
+                                \State $\theta\gets \{e_2/x\}$
+                        \ElsIf{$e_2$是变量符号$x$}
+                                \State $\theta\gets\{e_1/x\}$
+                        \ElsIf{$e_1$是常量而$e_2$不是 \textbf{or} $e_2$是常量而$e_1$不是%
+                                \textbf{or} $e_1, e_2$是两个不同的常量}
+                                \State\Return ``无法合一''
+                        \Else
+                                \Comment{此时$e_1,e_2$形如$f(t_1, \cdots, t_n)$
+                                和$g(s_1,\cdots,s_m)$；$f,g$是函数符号。}
+                        \EndIf
+                        \If{$f \neq g$}
+                                \State\Return ``无法合一''
+                        \Else
+                                \State $\theta_1 \gets Unify(t_1, s_1)$
+                                \State $\theta \gets \theta \circ \theta_1$
+                                \State $\theta_2 \gets Unify(Substitution(t_2, \theta), %
+                                Substitution(s_2,\theta))$
+                                \State $\theta \gets \theta \circ \theta_2$
+                                \State $\cdots$
+                                \State $\theta_n \gets Unify(Substitution(t_n, \theta), %
+                                Substitution(s_n, \theta))$
+                                \State $\theta \gets \theta_n$
+                                \State\Return 0
+                        \EndIf
+                \EndFunction
+        \end{algorithmic}
+\end{algorithm}
+                                        
+                        
+
+\section{Prolog逻辑程序设计}
+\textbf{Prolog} ({\bfseries Pro}gramming in {\bfseries Log}ic的缩写)
+是一种逻辑编程语言。它建立在逻辑学的理论基础上。最初被运用于自然语言
+等研究领域。现在它已广泛的应用在人工智能的研究中，它可以用来建造专家
+系统、自然语言理解、智能知识库等。
+\subsection*{历史}
+Prolog语言最早由Aix-Marseille大学的Alain Colmerauer
+与Phillipe Roussel等人于60年代末研究开发。
+1972年被公认为是Prolog语言正式诞生的年份，
+自1972年以后，分支出多种Prolog的方言。
+最主要的两种方言为Edinburgh和Aix-Marseille。
+最早的Prolog解释器由Roussel建造，而第一个Prolog编译器则是David Warren编写的。
+
+Prolog一直在北美和欧洲被广泛使用。
+日本政府曾经为了建造智能计算机而用Prolog来开发ICOT第五代计算机系统。
+在早期的机器智能研究领域，Prolog曾经是主要的开发工具。
+
+80年代Borland开发的Turbo Prolog，进一步普及了Prolog的使用。
+1995年确定了ISO Prolog标准。
+
+\subsection*{特点}
+有別于一般的函数式语言，prolog的程式是基于谓词逻辑的理论。
+最基本的写法是定立物件与物件之间的关系，
+之后可以用询问目标的方式来查询各种物价之间的关系。
+系统会自动进行匹配及回溯，找出所询问的答案。
+\paragraph{执行方式}
+\begin{itemize}
+        \item 搜索：在程序中自上而下地搜索事实和规则；
+        \item 匹配：将目标中的项与事实和规则进行匹配；
+        \item 回溯：当目标中一项失败时，
+                如果目标中有已经成功的的项，
+                就重新调用这些成功项中的一个，谋求新的成功。
+\end{itemize}
+
+\subsection*{程序元素}
+\begin{itemize}
+        \item 事实：关于对象性质和关系的事实语句；
+                \begin{lstlisting}[language=Prolog]
+student(John), married(Tom, Mary).
+human(kate).
+human(bill).
+likes(kate, bill).
+                \end{lstlisting}
+        \item 规则：关于对象性质和关系的定义规则语句；
+                \begin{lstlisting}[language=Prolog]
+B :- A /* 如果A则B */
+                \end{lstlisting}
+        \item 问题：关于对象性质或关系的询问。
+                \begin{lstlisting}[language=Prolog]
+?- student(John).
+?- married(Mary, x).
+                \end{lstlisting}
+\end{itemize}
+
+\subsection*{语法示例}
+Prolog代码中以大写字母开头的元素是变量，
+字符串、数字或以小写字母开头的元素是常量。下划线（\_）被称为匿名变量。
+\begin{lstlisting}[language=Prolog]
+/* 
+ * 表示kate和bill是人（human），
+ * kate喜欢bill，而表示规则： 
+ */
+friend(X, Y):-likes(X, Y), likes(Y, X).
+\end{lstlisting}
+
+\subsection{Prolog范例}
+{\bfseries\raggedright 罗素悖论\par}
+\begin{lstlisting}[language=Prolog]
+/*
+* 罗素悖论，导致不停机
+*/
+/* 寻找任何可以使px()规则成立的方式 */
+q:- px(_).
+/* 规定此规则不成立，即，此规则为假时此规则才为真 */
+px(1) :- \+ px(1). 
+/* 启动 */
+:- initialization(q).
+\end{lstlisting}
+
