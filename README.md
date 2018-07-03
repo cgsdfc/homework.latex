@@ -36,10 +36,11 @@ Here are the minimum requirements you must meet:
 - [Texlive][1]. It is the only tested tex distribution by now.
 (A faster mirror is that of [Tsinghua University][6])
 - [CTeX][2]. The **C**hinese **TeX** Package. It is bundled with texlive.
+- [Inkscape][4]. Open source 2D graphics editor that produces high quality `svg` graphics.
+The project uses the [svg package][7], which needs inkscape to work.
 
 Other requirements you're recommended to meet:
 - [Vimtex][3]. A Vim plugin that makes your tex life a heaven.
-- [Inkscape][4]. Open source 2D graphics editor that produces high quality `svg` graphics.
 - [Chinese][5]. My native language. It is great! You won't regret mastering it!
 
 Lisence
@@ -58,3 +59,4 @@ Any suggestion is welcome. Enjoy!
 [4]: https://inkscape.org/en/
 [5]: https://chinese.stackexchange.com/
 [6]: https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/
+[7]: https://ctan.org/pkg/svg
