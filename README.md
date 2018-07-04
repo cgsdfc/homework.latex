@@ -23,10 +23,9 @@ modify them with inkscape to suit you needs
 Language
 =========
 Most of the the documents are in Chinese and the typesetting conventions
-follows that of Chinese. In fact, it is actually meant for Chinese users.
-Since the number of materials
-on typesetting Chinese documents using `LaTeX` is not as rich as that written in English,
-this project aims to provide a bundle of working examples about how to make bueatiful
+follows that of Chinese. In fact, it is actually meant for those who want
+to typeset Chinese documents.
+This project aims to provide a bundle of working examples about how to make bueatiful
 documents in Chinese with `LaTeX`. I hope it really helps.
 
 Requirements

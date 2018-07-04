@@ -32,6 +32,7 @@
 *.xdy
 *.swp
 *.thm
+*.pdf
 .DS_Store
 
 # produced by latexmk
